@@ -1,3 +1,6 @@
+import string;
+import re;
+
 def read_protein_data (filename):
 
   proteins=[]
@@ -12,3 +15,10 @@ def read_protein_data (filename):
          )
      proteins.append(protein_data)
   return proteins
+
+def decode(word):
+    for i in range(len(word)):
+        if word[i].isdigit():
+            word = word.replace(word[i],word[i+1]*(int(word[i])-1))
+    return word
+
