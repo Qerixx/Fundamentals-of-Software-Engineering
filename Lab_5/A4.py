@@ -37,5 +37,28 @@ def search(protein):
     else:
         return answer_search
 
+def mode(protein):
+    proteins = read_protein_data (file_proteins)
+    f_protein=''
+    for i in range(len(proteins)):
+            if (proteins[i])[0]==protein:
+                f_protein = (proteins[i])[2]
+    if f_protein=='':
+        return 'MISSING'
+
+    letters=dict()
+    for i in f_protein:
+        letters[i]=letters.get(i,0)+1
+
+    answer_letter = max(letters,key=letters.get)
+    max_num= letters[answer_letter]
+    for i in sorted(letters):
+        print(i)
+        if letters[i]==max_num:
+            answer_letter=i
+            break
+    return answer_letter,max_num
+
+
 
 
