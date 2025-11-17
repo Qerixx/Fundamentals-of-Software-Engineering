@@ -27,6 +27,7 @@ def decode(word):
   
 def search(protein):
     answer_search=''
+    protein=decode(protein)
     proteins = read_protein_data (file_proteins)
     for i in range(len(proteins)):
         if (proteins[i])[2].find(protein):
@@ -35,5 +36,6 @@ def search(protein):
         return 'NOT FOUND'
     else:
         return answer_search
+
 
 
