@@ -1,3 +1,6 @@
+file_commands = 'commands.0.txt'
+file_proteins = 'sequences.0.txt'
+
 def read_protein_data (filename):
 
   proteins=[]
@@ -86,18 +89,40 @@ def diff(protein1, protein2):
 
     return answer_diff
 
-file = open('genedata.txt','w')
+file = open('genedata0.txt','w')
 file.write('Matveuk Antonina\n')
-file.write('Genetic Searching')
-file.write('--------------------------------------------------------------------------')
+file.write('Genetic Searching\n')
+file.write('--------------------------------------------------------------------------\n')
 commands = read_commands_data(file_commands)
+count = 1
 for i in range(len(commands)):
     if (commands[i])[0] == 'search':
-        file.write(search((commands[i])[1]))
-    elif (commands[i])[0] == 'mode':
-        file.write(mode((commands[i])[1]))
-    elif (commands[i])[0] == 'diff':
-        file.write(search((commands[i])[1],(commands[i])[2]))
+        file.write('00'+str(count)+'   ')
+        file.write((commands[i])[0]+'   '+ decode((commands[i])[1])+'\n')
+        file.write('organism'+'                     '+'protein\n')
+        file.write(search((commands[i])[1])+'\n')
+        file.write('--------------------------------------------------------------------------\n')
+        count = count+1
+
+
+    if (commands[i])[0] == 'mode':
+        file.write('00'+str(count)+'   ')
+        file.write((commands[i])[0]+'   '+ decode((commands[i])[1])+'\n')
+        file.write('amino-acid occurs:\n')
+        file.write(str((mode((commands[i])[1]))[0])+'       '+str((mode((commands[i])[1]))[1])+'\n')
+        file.write('--------------------------------------------------------------------------\n')
+        count = count+1
+
+
+
+    if (commands[i])[0] == 'diff':
+        file.write('00'+str(count)+'   ')
+        file.write((commands[i])[0]+'   '+ (commands[i])[1]+'   '+ (commands[i])[2]+'\n')
+        file.write('amino-acids difference: \n')
+        file.write(str(diff((commands[i])[1],(commands[i])[2]))+'\n')
+        file.write('--------------------------------------------------------------------------\n')
+        count = count+1
+
 
 
 
