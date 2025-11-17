@@ -2,7 +2,6 @@ file_commands = 'commands.0.txt'
 file_proteins = 'sequences.0.txt'
 
 def read_protein_data (filename):
-
   proteins=[]
   file = open(filename, 'r',encoding='utf-8')
 
@@ -16,6 +15,26 @@ def read_protein_data (filename):
      proteins.append(protein_data)
   return proteins
 
+def read_commands_data(filename):
+    commands=[]
+    file = open(filename, 'r',encoding='utf-8')
+
+    for line in file:
+       parts=line.strip().split('\t')
+       if parts[0]=='mode' or parts[0]=='search':
+           commands_data= (
+              parts[0].strip(),
+              parts[1].strip(),
+              )
+       else:
+           commands_data= (
+              parts[0].strip(),
+              parts[1].strip(),
+              parts[2].strip()
+              )
+       commands.append(commands_data)
+    return commands
+  
 def decode(word):
     final_word=''
     for i in range(len(word)):
@@ -122,6 +141,7 @@ for i in range(len(commands)):
         file.write(str(diff((commands[i])[1],(commands[i])[2]))+'\n')
         file.write('--------------------------------------------------------------------------\n')
         count = count+1
+
 
 
 
