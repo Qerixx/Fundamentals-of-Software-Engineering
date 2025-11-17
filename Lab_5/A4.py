@@ -1,6 +1,3 @@
-import string;
-import re;
-
 def read_protein_data (filename):
 
   proteins=[]
@@ -30,12 +27,12 @@ def search(protein):
     protein=decode(protein)
     proteins = read_protein_data (file_proteins)
     for i in range(len(proteins)):
-        if (proteins[i])[2].find(protein):
-            answer_search = (proteins[i])[1]+ '   ' +(proteins[i])[2]
+        if protein in (proteins[i])[2]:
+            answer_search = (proteins[i])[1]+ '   ' + (proteins[i])[0]
+            return answer_search
+            
     if answer_search == '':
         return 'NOT FOUND'
-    else:
-        return answer_search
 
 def mode(protein):
     proteins = read_protein_data (file_proteins)
@@ -101,6 +98,7 @@ for i in range(len(commands)):
         file.write(mode((commands[i])[1]))
     elif (commands[i])[0] == 'diff':
         file.write(search((commands[i])[1],(commands[i])[2]))
+
 
 
 
