@@ -89,6 +89,20 @@ def diff(protein1, protein2):
 
     return answer_diff
 
+file = open('genedata.txt','w')
+file.write('Matveuk Antonina\n')
+file.write('Genetic Searching')
+file.write('--------------------------------------------------------------------------')
+commands = read_commands_data(file_commands)
+for i in range(len(commands)):
+    if (commands[i])[0] == 'search':
+        file.write(search((commands[i])[1]))
+    elif (commands[i])[0] == 'mode':
+        file.write(mode((commands[i])[1]))
+    elif (commands[i])[0] == 'diff':
+        file.write(search((commands[i])[1],(commands[i])[2]))
+
+
 
 
 
