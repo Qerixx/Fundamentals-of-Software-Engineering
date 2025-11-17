@@ -24,5 +24,16 @@ def decode(word):
         else:
             final_word=final_word+word[i]
     return final_word
+  
+def search(protein):
+    answer_search=''
+    proteins = read_protein_data (file_proteins)
+    for i in range(len(proteins)):
+        if (proteins[i])[2].find(protein):
+            answer_search = (proteins[i])[1]+ '   ' +(proteins[i])[2]
+    if answer_search == '':
+        return 'NOT FOUND'
+    else:
+        return answer_search
 
 
