@@ -53,11 +53,11 @@ def mode(protein):
     answer_letter = max(letters,key=letters.get)
     max_num= letters[answer_letter]
     for i in sorted(letters):
-        print(i)
         if letters[i]==max_num:
             answer_letter=i
             break
     return answer_letter,max_num
+
 
 
 
