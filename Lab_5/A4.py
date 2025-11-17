@@ -58,6 +58,38 @@ def mode(protein):
             break
     return answer_letter,max_num
 
+def diff(protein1, protein2):
+    proteins = read_protein_data (file_proteins)
+    f_protein1=''
+    f_protein2=''
+    for i in range(len(proteins)):
+            if (proteins[i])[0]==protein1:
+                f_protein1 = (proteins[i])[2]
+    if f_protein1=='':
+        return 'MISSING'
+
+    for i in range(len(proteins)):
+            if (proteins[i])[0]==protein2:
+                f_protein2 = (proteins[i])[2]
+    if f_protein2=='':
+        return 'MISSING'
+
+    if len(f_protein1)>len(f_protein2):
+        max_protein = f_protein1
+        min_protein = f_protein2
+    else:
+        max_protein=f_protein2
+        min_protein = f_protein1
+
+    answer_diff = (len(max_protein)-len(min_protein))
+
+    for i in range(len(min_protein)):
+        if min_protein[i] != max_protein[i]:
+            answer_diff = answer_diff + 1
+
+    return answer_diff
+
+
 
 
 
