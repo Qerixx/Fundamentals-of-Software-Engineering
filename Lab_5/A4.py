@@ -17,8 +17,12 @@ def read_protein_data (filename):
   return proteins
 
 def decode(word):
+    final_word=''
     for i in range(len(word)):
         if word[i].isdigit():
-            word = word.replace(word[i],word[i+1]*(int(word[i])-1))
-    return word
+            final_word = final_word + word[i+1]*(int(word[i])-1)
+        else:
+            final_word=final_word+word[i]
+    return final_word
+
 
