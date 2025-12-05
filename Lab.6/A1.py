@@ -38,3 +38,20 @@ def  load_workouts_data():
     except FileNotFoundError:
         print("File not found")
         return []
+
+def get_stats(user_data,workouts_data):
+    count_workouts = 0
+    count_users = 0
+    count_calories = 0
+    count_time = 0
+    count_distance = 0
+    for workout in workouts_data:
+        count_workouts += 1
+    for user in user_data:
+        count_users += 1
+    count_calories = sum(workout['calories'] for workout in workouts_data)
+    count_time = sum(workout['duration'] for workout in workouts_data) #в минутах
+    count_distance= sum(workout['distance'] for workout in workouts_data)
+    count_time = count_time / 60
+    return count_workouts, count_users, count_calories, count_time, count_distance
+        
