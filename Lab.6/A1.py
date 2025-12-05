@@ -54,4 +54,15 @@ def get_stats(user_data,workouts_data):
     count_distance= sum(workout['distance'] for workout in workouts_data)
     count_time = count_time / 60
     return count_workouts, count_users, count_calories, count_time, count_distance
+
+def main1():
+    stats = get_stats(load_users_data(),load_workouts_data())
+    print('ОБЩАЯ СТАТИСТИКА\n')
+    print('===========================\n')
+    print(f'Всего тренировок: {stats[0]}')
+    print(f'Всего пользователей: {stats[1]}')
+    print(f'Сожжено калорий: {stats[2]}')
+    print(f'Общее время: {stats[3]:.2f} часов')
+    print(f'Пройдено дистанции: {stats[4]} км')
         
+
