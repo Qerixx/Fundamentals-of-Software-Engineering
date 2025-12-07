@@ -92,7 +92,74 @@ def analyze_user_activity(users_data):
         print(f'Время: {(user[3]/60):.1f} часов')
         num += 1
 
-        
+def analyze_workout_types(workouts):
+    count_run = 0
+    avg_time_run = []
+    avg_calories_run = []
+
+    count_strength = 0
+    avg_time_strength = []
+    avg_calories_strength = []
+
+    count_bike = 0
+    avg_time_bike = []
+    avg_calories_bike = []
+
+    count_swim = 0
+    avg_time_swim = []
+    avg_calories_swim = []
+
+    count_walk = 0
+    avg_time_walk = []
+    avg_calories_walk = []
+
+    for workout in workouts:
+        if workout['type'] == 'бег':
+            count_run +=1
+            avg_time_run.append(workout['duration'])
+            avg_calories_run.append(workout['calories'])
+
+        if workout['type'] == 'силовая тренировка':
+            count_strength +=1
+            avg_time_strength.append(workout['duration'])
+            avg_calories_strength.append(workout['calories'])
+
+        if workout['type'] == 'велосипед':
+            count_bike +=1
+            avg_time_bike.append(workout['duration'])
+            avg_calories_bike.append(workout['calories'])
+
+        if workout['type'] == 'плавание':
+            count_swim +=1
+            avg_time_swim.append(workout['duration'])
+            avg_calories_swim.append(workout['calories'])
+
+        if workout['type'] == 'ходьба':
+            count_walk +=1
+            avg_time_walk.append(workout['duration'])
+            avg_calories_walk.append(workout['calories'])
+
+    print('РАСПРЕДЕЛЕНИЕ ПО ТИПАМ ТРЕНИРОВОК:')
+    print(f'Бег: {count_run} тренировок ({(count_run/len(workouts)*100):.1f}%)')
+    print(f'  Средняя длительность: {sum(avg_time_run)//len(avg_time_run)} мин')
+    print(f'  Средние калории: {sum(avg_calories_run)//len(avg_calories_run)} калорий')
+
+    print(f'Силовая тренировка: {count_strength} тренировок ({(count_strength / len(workouts) * 100):.1f}%)')
+    print(f'  Средняя длительность: {sum(avg_time_strength) // len(avg_time_strength)} мин')
+    print(f'  Средние калории: {sum(avg_calories_strength) // len(avg_calories_strength)} калорий')
+
+    print(f'Велосипед: {count_bike} тренировок ({(count_bike / len(workouts) * 100):.1f}%)')
+    print(f'  Средняя длительность: {sum(avg_time_bike) // len(avg_time_bike)} мин')
+    print(f'  Средние калории: {sum(avg_calories_bike) // len(avg_calories_bike)} калорий')
+
+    print(f'Плавание: {count_swim} тренировок ({(count_swim / len(workouts) * 100):.1f}%)')
+    print(f'  Средняя длительность: {sum(avg_time_swim) // len(avg_time_swim)} мин')
+    print(f'  Средние калории: {sum(avg_calories_swim) // len(avg_calories_swim)} калорий')
+
+    print(f'Ходьба: {count_walk} тренировок ({(count_walk / len(workouts) * 100):.1f}%)')
+    print(f'  Средняя длительность: {sum(avg_time_walk) // len(avg_time_walk)} мин')
+    print(f'  Средние калории: {sum(avg_calories_walk) // len(avg_calories_walk)} калорий')
+
 
 
 
