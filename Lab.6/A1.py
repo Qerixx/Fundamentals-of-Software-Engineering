@@ -168,6 +168,41 @@ def find_user_workouts(users, user_name):
     for workout in workouts:
         if workout['user_id'] == id:
             print(workout)
+def analyze_user(workouts,user_name):
+    users = load_users_data()
+    count_workouts = 0
+    count_calories = 0
+    count_time = 0
+    count_distance = 0
+    work_type = []
+    for user in users:
+        if user['name'] == user_name:
+            id = user['user_id']
+            age = user['age']
+            weight = user['weight']
+            lvl = user['fitness_level']
+    for workout in workouts:
+        if workout['user_id'] == id:
+            count_workouts += 1
+            count_calories +=  workout['calories']
+            count_time += workout['duration']
+            count_distance += workout['distance']
+            work_type.append(workout['type'])
+    count_calories_per_workout = count_calories / count_workouts
+    workout_type = {}
+    for i in work_type:
+        workout_type[i]=workout_type.get(i,0)+1
+    fav_type = max(workout_type, key=workout_type.get)
+    print(f'ДЕТАЛЬНЫЙ АНАЛИЗ ДЛЯ ПОЛЬЗОВАТЕЛЯ: {user_name}')
+    print('===========================================')
+    print(f'Возраст: {age}, Вес: {weight}')
+    print(f'Уровень: {lvl}')
+    print(f'Тренировок: {count_workouts}')
+    print(f'Сожжено калорий: {count_calories}')
+    print(f'Общее время: {(count_time/60):.1f} часов')
+    print(f'Пройдено дистанции: {count_distance} км')
+    print(f'Средние калории за тренировку: {(count_calories_per_workout):.0f}')
+    print(f'Любимый тип тренировки: {fav_type}')
 
 
 
