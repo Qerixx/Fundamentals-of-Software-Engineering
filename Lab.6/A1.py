@@ -160,6 +160,16 @@ def analyze_workout_types(workouts):
     print(f'  Средняя длительность: {sum(avg_time_walk) // len(avg_time_walk)} мин')
     print(f'  Средние калории: {sum(avg_calories_walk) // len(avg_calories_walk)} калорий')
 
+def find_user_workouts(users, user_name):
+    workouts = load_workouts_data()
+    for user in users:
+        if user['name'] == user_name:
+            id = user['user_id']
+    for workout in workouts:
+        if workout['user_id'] == id:
+            print(workout)
+
+
 
 
 
