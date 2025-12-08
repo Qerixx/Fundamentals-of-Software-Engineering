@@ -204,6 +204,34 @@ def analyze_user(workouts,user_name):
     print(f'Средние калории за тренировку: {(count_calories_per_workout):.0f}')
     print(f'Любимый тип тренировки: {fav_type}')
 
+def circle_diagram():
+    count_run = 0
+    count_strength = 0
+    count_bike = 0
+    count_swim = 0
+    count_walk = 0
+    workouts = load_workouts_data()
+    for workout in workouts:
+        if workout['type'] == 'бег':
+            count_run += 1
+
+        if workout['type'] == 'силовая тренировка':
+            count_strength += 1
+
+        if workout['type'] == 'велосипед':
+            count_bike += 1
+
+        if workout['type'] == 'плавание':
+            count_swim += 1
+
+        if workout['type'] == 'ходьба':
+            count_walk += 1
+
+    y = np.array([(count_run/len(workouts)*100), (count_strength / len(workouts) * 100), (count_bike / len(workouts) * 100), (count_swim / len(workouts) * 100),(count_walk / len(workouts) * 100) ])
+    mylabels = ["Бег", "Силовая тренировка", "Велосипед", "Плавание","Ходьба"]
+    plt.title('Распределение типов тренировок')
+    plt.pie(y, labels=mylabels, startangle=90,autopct='%1.1f%%')
+    plt.show()
 
 
 
