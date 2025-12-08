@@ -233,6 +233,41 @@ def circle_diagram():
     plt.pie(y, labels=mylabels, startangle=90,autopct='%1.1f%%')
     plt.show()
 
+def pillar_users_diagram():
+    stat = []
+    users_data = load_users_data()
+    workouts = load_workouts_data()
+    for user in users_data:
+        user_id = user['user_id']
+        part = [user_id, 0,4]
+        for workout in workouts:
+            if user_id == workout['user_id']:
+                part[1] += 1  # колво тренировок
+                part[2] = user['name'] #имя
+        stat.append(part)
+    users = []
+    for user in stat:
+        part = [user[0], user[1],user[2]]
+        users.append(part)
+    users.sort(key=lambda x: x[1],reverse=True)
+    users_names = [0,0,0,0,0,0,0,0,0,0]
+    users_workouts = [0,0,0,0,0,0,0,0,0,0]
+    i=0
+    for user in users:
+        users_names[i] = user[2]
+        i+=1
+    i=0
+    for workout in users:
+        users_workouts[i] = workout[1]
+        i+=1
+    plt.bar(users_names, users_workouts, align='center',color='pink')
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel('Пользователи')
+    plt.ylabel('Количество тренировок')
+    plt.title('Активность пользвателей(Количество тренировок)')
+    plt.show()
+
+
 
 
 
