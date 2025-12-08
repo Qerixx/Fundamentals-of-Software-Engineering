@@ -267,6 +267,78 @@ def pillar_users_diagram():
     plt.title('Активность пользвателей(Количество тренировок)')
     plt.show()
 
+def pillar_calories_diagram():
+    workouts = load_workouts_data()
+    avg_time_run=[]
+    avg_calories_run=[]
+    avg_time_strength = []
+    avg_calories_strength = []
+    avg_time_bike = []
+    avg_calories_bike = []
+    avg_time_swim = []
+    avg_calories_swim = []
+    avg_time_walk = []
+    avg_calories_walk = []
+    for workout in workouts:
+        if workout['type'] == 'бег':
+            avg_time_run.append(workout['duration'])
+            avg_calories_run.append(workout['calories'])
+
+        if workout['type'] == 'силовая тренировка':
+            avg_time_strength.append(workout['duration'])
+            avg_calories_strength.append(workout['calories'])
+
+        if workout['type'] == 'велосипед':
+            avg_time_bike.append(workout['duration'])
+            avg_calories_bike.append(workout['calories'])
+
+        if workout['type'] == 'плавание':
+            avg_time_swim.append(workout['duration'])
+            avg_calories_swim.append(workout['calories'])
+
+        if workout['type'] == 'ходьба':
+            avg_time_walk.append(workout['duration'])
+            avg_calories_walk.append(workout['calories'])
+    workouts = ['бег', 'силовая тренировка', 'велосипед', 'плавание', 'ходьба']
+    print(sum(avg_calories_run))
+    calories_per_minute = [sum(avg_calories_run)/sum(avg_time_run) , sum(avg_calories_strength)/sum(avg_time_strength) ,
+                           sum(avg_calories_bike)/sum(avg_time_bike), sum(avg_calories_swim)/sum(avg_time_swim),
+                           sum(avg_calories_walk)/sum(avg_time_walk) ]
+    calories_per_minute.sort(reverse=True)
+    plt.bar(workouts, calories_per_minute, align='center', color='purple')
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel('Тип тренировки')
+    plt.ylabel('Калории в минуту')
+    plt.title('Эффективность тренировок(калории/минуту)')
+    plt.show()
+
+def pillar_users_calories():
+    stat = []
+    users_data = load_users_data()
+    workouts = load_workouts_data()
+    for user in users_data:
+        user_id = user['user_id']
+        part = [0, 0]
+        for workout in workouts:
+            if user_id == workout['user_id']:
+                part[0] = user['name']
+                part[1] += workout['calories']  # колво калорий
+        stat.append(part)
+    stat.sort(key=lambda x: x[1],reverse=True)
+    users = []
+    calories = []
+    for user in stat:
+        users.append(user[0])
+    for calorie in stat:
+        calories.append(calorie[1])
+    plt.bar(users, calories, align='center', color='purple')
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel('Пользователи')
+    plt.ylabel('Общие калории')
+    plt.title('Сравнение пользователей по общим затраченным калориям')
+    plt.show()
+
+
 
 
 
