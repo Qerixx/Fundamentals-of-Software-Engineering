@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def  load_users_data():
     try:
@@ -53,8 +54,8 @@ def get_stats(user_data,workouts_data):
     count_time = sum(workout['duration'] for workout in workouts_data) #в минутах
     count_distance= sum(workout['distance'] for workout in workouts_data)
     count_time = count_time / 60
-    print('ОБЩАЯ СТАТИСТИКА\n')
-    print('===========================\n')
+    print('ОБЩАЯ СТАТИСТИКА')
+    print('===========================')
     print(f'Всего тренировок: {count_workouts}')
     print(f'Всего пользователей: {count_users}')
     print(f'Сожжено калорий: {count_calories}')
@@ -83,7 +84,7 @@ def analyze_user_activity(users_data):
     users.sort(key=lambda x: x[1], reverse=True)
     max_users = [users[0],users[1],users[2]]
 
-    print('ТОП-3 АКТИВНЫХ ПОЛЬЗОВАТЕЛЕЙ:\n')
+    print('ТОП-3 АКТИВНЫХ ПОЛЬЗОВАТЕЛЕЙ:')
     num = 1
     for user in max_users:
         print(f'{num}. {user[4]}({user[5]})')
@@ -168,6 +169,7 @@ def find_user_workouts(users, user_name):
     for workout in workouts:
         if workout['user_id'] == id:
             print(workout)
+
 def analyze_user(workouts,user_name):
     users = load_users_data()
     count_workouts = 0
@@ -312,7 +314,7 @@ def pillar_calories_diagram():
     plt.title('Эффективность тренировок(калории/минуту)')
     plt.show()
 
-def pillar_users_calories():
+def pillar_users_calories_diagram():
     stat = []
     users_data = load_users_data()
     workouts = load_workouts_data()
@@ -337,6 +339,19 @@ def pillar_users_calories():
     plt.ylabel('Общие калории')
     plt.title('Сравнение пользователей по общим затраченным калориям')
     plt.show()
+
+def main():
+    print(get_stats(load_users_data(),load_workouts_data()))
+    print(analyze_user_activity(load_users_data()))
+    print(analyze_workout_types(load_workouts_data()))
+    print(find_user_workouts(load_users_data(), 'Борис'))
+    print(analyze_user(load_workouts_data(),'Борис'))
+    print(circle_diagram())
+    print(pillar_users_diagram())
+    print(pillar_calories_diagram())
+    print(pillar_users_calories_diagram())
+
+print(main())
 
 
 
